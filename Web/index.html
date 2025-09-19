@@ -1,0 +1,199 @@
+<!--
+Project: AI Conversational Agent
+File: index.html
+This is the frontend interface I built for my chatbot.
+I used plain HTML, CSS, and JavaScript (no frameworks).
+It has a floating chat button and a chat window connected to Rasa REST API.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rasa Chatbot</title>
+  <style>
+    /* Floating button */
+    #chat-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #fa7070;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    /* Chat container */
+    #chat-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 350px;
+      height: 450px;
+      border-radius: 10px;
+      display: none; /* hidden initially */
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      background-color: #FFF0F5;
+    }
+
+    #chat-header {
+      background-color: #fa7070;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #chat {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 70%;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 15px;
+      word-wrap: break-word;
+    }
+
+    .user {
+      background-color: #fa7070;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+      border-radius: 15px 15px 0 15px;
+    }
+
+    .bot {
+      background-color: #F3E5F5;
+      color: black;
+      margin-right: auto;
+      text-align: left;
+      border-radius: 15px 15px 15px 0;
+    }
+
+    #input-container {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    #input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    #send {
+      padding: 10px 20px;
+      border: none;
+      background-color: #fa7070;
+      color: white;
+      cursor: pointer;
+    }
+
+    #send:hover {
+      background-color: #C2185B;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating chat button -->
+  <button id="chat-btn">🗯️</button>
+
+  <!-- Chat container -->
+  <div id="chat-container">
+    <div id="chat-header">✨ Guide Master</div>
+    <div id="chat"></div>
+    <div id="input-container">
+      <input id="input" type="text" placeholder="Type a message...">
+      <button id="send">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBtn = document.getElementById("chat-btn");
+    const chatContainer = document.getElementById("chat-container");
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("input");
+    const send = document.getElementById("send");
+
+    // Toggle chat visibility
+    chatBtn.onclick = () => {
+      chatContainer.style.display = chatContainer.style.display === "flex" ? "none" : "flex";
+      if (chatContainer.style.display === "flex" && chat.innerHTML === "") {
+        sendMessage("/greet", false); // send initial greeting
+      }
+    };
+
+    function addMessage(sender, text) {
+      const p = document.createElement("div");
+      p.classList.add("message", sender);
+      p.textContent = text;
+      chat.appendChild(p);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    async function sendMessage(message, isUser = true) {
+      if (!message) return;
+      if (isUser) addMessage("user", message);
+
+      try {
+        const response = await fetch("http://localhost:5005/webhooks/rest/webhook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sender: "user", message: message })
+        });
+
+        const data = await response.json();
+        data.forEach(msg => {
+          if (msg.text) addMessage("bot", msg.text);
+          if (msg.image) {
+                const img = document.createElement("img");
+                img.src = msg.image;
+                img.style.maxWidth = "100%";
+                img.style.borderRadius = "10px";
+                chat.appendChild(img);
+                chat.scrollTop = chat.scrollHeight;
+              }});
+
+        
+      } catch (err) {
+        addMessage("bot", "⚠️ Server not reachable. Make sure Rasa is running.");
+      }
+    }
+
+    send.onclick = () => {
+      sendMessage(input.value);
+      input.value = "";
+    };
+
+    input.addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        sendMessage(input.value);
+        input.value = "";
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

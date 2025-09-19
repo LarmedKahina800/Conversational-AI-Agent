@@ -1,0 +1,143 @@
+# NLU file (Natural Language Understanding)
+# I created intents and training examples here.
+# This is where I teach my chatbot how to recognize user input.
+
+
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - see you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so perfect
+    - so good
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremely sad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - How are you?
+    - Tell me about you.
+    - Who are you?
+    - Introduce yourself
+    - Tell me about yourself
+    - What is your name?
+    - Can you introduce yourself?
+
+
+
+- intent: ask_creator
+  examples: |
+    - Who created you?
+    - Who is your creator?
+    - Tell me about your developer
+    - Who made you?
+    - Who designed you?
+
+
+- intent: ask_ollama
+  examples: |
+    - Tell me a joke
+    - Who is Einstein?
+    - What is quantum physics?
+    - Explain recursion
+    - Write a Python function to reverse a string
+    - How does quicksort work?
+    - What is the difference between AI and machine learning?
+    - Translate hello to French
+    - Summarize World War II
+    - What is the capital of Japan?
+    - Can you explain relativity?
+    - Define gravity
+    - How does photosynthesis work?
+    - Translate 'good night' into Spanish
+    - Tell me about black holes
+    - What is blockchain?
+    - Who is the president of the USA?
+    - Explain object-oriented programming
+    - How do airplanes fly?
+    - Write a poem about love
+    - What is the Pythagorean theorem?
+    - Solve 2+2
+    - Describe climate change
+    - What is machine learning in simple words?
+    - Can you summarize this topic for me?
+
+
+
+

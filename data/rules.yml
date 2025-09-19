@@ -1,0 +1,43 @@
+# Rules file
+# This file is for fixed behaviors.
+# Example: always say goodbye when user says goodbye.
+
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+- rule: Respond to creator questions
+  steps:
+    - intent: ask_creator
+    - action: utter_creator_info
+
+
+# Rule for asking general knowledge (I forward it to Ollama)
+
+- rule: Handle Ollama questions
+  steps:
+    - intent: ask_ollama
+    - action: action_ask_ollama
+
+# Fallback rule (when NLU doesn’t understand, I also send it to Ollama)
+
+- rule: Fallback to Ollama
+  steps:
+    - intent: nlu_fallback
+    - action: action_ask_ollama
+
+
+
+
+
+

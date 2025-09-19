@@ -1,0 +1,7 @@
+# Endpoints file
+# I use this to configure action server and (optionally) databases.
+
+# Action server (this is required for my custom action with Ollama)
+action_endpoint:
+  url: "http://localhost:5055/webhook"
+  timeout: 9000

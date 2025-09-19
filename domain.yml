@@ -1,0 +1,55 @@
+# Domain file (this is the brain of my bot)
+# It contains intents, responses, actions, and slots.
+
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - ask_creator
+  - ask_ollama
+
+responses:
+
+  utter_greet:
+    - text: "Hey! How are you?"
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://share.google/images/MjdtANe8cfi7cfG48"
+  utter_did_that_help:
+    - text: "Did that help you?"
+  utter_happy:
+    - text: "Great, carry on!"
+  utter_goodbye:
+    - text: "Bye"
+  utter_iamabot:
+    - text: "I am Guide Master 🤖, a conversational AI created by Kahina, a student passionate about learning and artificial intelligence. My purpose is to chat, assist, and show how AI can understand and respond naturally to human language. "
+  utter_default:
+    - text: "Sorry, I don't know about that. Let me check with my knowledge base..."
+  utter_creator_info:
+    - text: "Hello! I was created by a passionate student from the High School of Artificial Intelligence in Algeria. 
+        I am currently in L3, and I completed my Baccalaureate with excellent mention (18.29/20). 
+        I love AI, building chatbots, and learning new technologies. 
+        This project is a part of my journey to explore conversational agents and language models."
+
+actions:
+  - action_ask_ollama
+
+slots:
+  conversation_history:
+    type: list
+    initial_value: []
+    influence_conversation: false
+    mappings: []
+
+session_config:
+  session_expiration_time: 9000
+  carry_over_slots_to_new_session: true
+
+
+
