@@ -97,7 +97,7 @@ ai-conversational-agent/
 
 Here is a screenshot of the chatbot in action:
 
-![Chatbot Screenshot](Images\Screenshot1.png)
+![Chatbot Screenshot](Images/Screenshot1.png)
 
 
 ---
@@ -108,6 +108,7 @@ Here is a screenshot of the chatbot in action:
 * Writing custom actions in Python to connect with external tools (Ollama).
 * Managing conversation history with slots.
 * Creating a web chat interface with HTML, CSS, and JavaScript.
+
 
 
 
